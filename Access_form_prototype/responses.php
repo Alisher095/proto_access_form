@@ -1,0 +1,59 @@
+<?php
+require __DIR__ . '/auth/middleware.php';
+$userName = $_SESSION['user']['name'] ?? 'User';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccessForm | Responses</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
+        <img src="assets/images/logo.svg" alt="AccessForm logo" height="32" />
+        AccessForm
+      </a>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge badge-soft" data-user-badge data-user-name="<?php echo htmlspecialchars($userName); ?>">Signed in</span>
+        <a class="btn btn-outline-secondary btn-sm" href="builder.php">Back to editor</a>
+        <a class="btn btn-outline-secondary btn-sm" href="auth/logout.php">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h1 class="h3 mb-1">Form responses</h1>
+        <p class="text-muted">Total responses: <strong data-response-count>0</strong></p>
+      </div>
+      <a class="btn btn-outline-primary" href="preview.php">Open live form</a>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Latest submissions</div>
+      <div class="card-body table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Submitted at</th>
+              <th scope="col">Response details</th>
+            </tr>
+          </thead>
+          <tbody data-response-table></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/responses.js"></script>
+</body>
+</html>

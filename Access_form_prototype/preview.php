@@ -1,0 +1,51 @@
+<?php
+require __DIR__ . '/auth/middleware.php';
+$userName = $_SESSION['user']['name'] ?? 'User';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccessForm | Preview</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
+        <img src="assets/images/logo.svg" alt="AccessForm logo" height="32" />
+        AccessForm
+      </a>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge badge-soft" data-user-badge data-user-name="<?php echo htmlspecialchars($userName); ?>">Signed in</span>
+        <a class="btn btn-outline-secondary btn-sm" href="builder.php">Back to editor</a>
+        <a class="btn btn-outline-secondary btn-sm" href="auth/logout.php">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="container my-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="preview-form">
+          <h1 class="h3" data-form-title></h1>
+          <p class="text-muted" data-form-description></p>
+          <div class="alert alert-success d-none" role="status" data-submit-alert>
+            Response submitted! View it in the responses dashboard.
+          </div>
+          <form data-preview-form>
+            <div data-form-body></div>
+            <button class="btn btn-primary" type="submit">Submit response</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/preview.js"></script>
+</body>
+</html>

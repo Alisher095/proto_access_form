@@ -1,0 +1,91 @@
+<?php
+require __DIR__ . '/auth/middleware.php';
+$userName = $_SESSION['user']['name'] ?? 'User';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AccessForm | Form Builder</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="navbar navbar-expand-lg bg-white border-bottom">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.php">
+        <img src="assets/images/logo.svg" alt="AccessForm logo" height="32" />
+        AccessForm
+      </a>
+      <div class="d-flex align-items-center gap-3">
+        <span class="badge badge-soft" data-user-badge data-user-name="<?php echo htmlspecialchars($userName); ?>">Signed in</span>
+        <a class="btn btn-outline-secondary btn-sm" href="responses.php">Responses</a>
+        <a class="btn btn-outline-secondary btn-sm" href="auth/logout.php">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="container my-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+      <div>
+        <h1 class="h3 mb-0">Form builder</h1>
+        <p class="text-muted">Drag fields into the canvas and edit their properties.</p>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary" type="button" data-preview>Save & preview</button>
+        <a class="btn btn-primary" href="preview.php">Open preview</a>
+      </div>
+    </div>
+
+    <section class="card mb-4">
+      <div class="card-body">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <label class="form-label" for="formTitle">Form title</label>
+            <input class="form-control" id="formTitle" data-form-title type="text" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label" for="formDescription">Form description</label>
+            <input class="form-control" id="formDescription" data-form-description type="text" />
+          </div>
+        </div>
+        <p class="text-muted mt-2">Preview name: <strong data-form-title-preview></strong></p>
+      </div>
+    </section>
+
+    <section class="row g-4">
+      <div class="col-lg-3">
+        <div class="panel">
+          <h5>Field palette</h5>
+          <p class="text-muted small">Drag fields onto the canvas.</p>
+          <div data-palette></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="panel">
+          <h5>Form canvas</h5>
+          <div class="form-canvas" data-canvas aria-live="polite"></div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="panel" aria-live="polite">
+          <h5>Properties</h5>
+          <div data-properties></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container py-4">
+    <div class="d-flex justify-content-between flex-wrap gap-2">
+      <span>Drag and drop fields • Accessible properties panel</span>
+      <span class="text-muted">AI assist placeholder</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/builder.js"></script>
+</body>
+</html>
